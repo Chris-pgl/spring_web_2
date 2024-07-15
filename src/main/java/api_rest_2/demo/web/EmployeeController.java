@@ -41,9 +41,9 @@ public class EmployeeController {
         rService.saveRole(r2);
         rService.saveRole(r3);
 
-        Employee e1 = new Employee("Gino","Merend",1200,0,r1);
-        Employee e2 = new Employee("Luca","Nerv",1300,0,r2);
-        Employee e3 = new Employee("Paolo","Bita",1400,0,r3);
+        Employee e1 = new Employee("Gino","Merend",1800,0,r1);
+        Employee e2 = new Employee("Luca","Nerv",1200,0,r2);
+        Employee e3 = new Employee("Paolo","Bita",1600,0,r3);
 
 
         service.save(e1);
