@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import api_rest_2.demo.entity.Employee;
+import api_rest_2.demo.entity.Role;
 import api_rest_2.demo.service.EmployeeService;
+import api_rest_2.demo.service.RoleService;
 import api_rest_2.demo.web.dto.EmployeeDTO;
 
 @RestController
@@ -24,12 +26,25 @@ public class EmployeeController {
     @Autowired
     EmployeeService service;
 
+    @Autowired
+    RoleService rService;
+
     //create and add
     @GetMapping("add")
     public ResponseEntity<Void> addEmployee(){
-        Employee e1 = new Employee("Gino","Merend",1200,0);
-        Employee e2 = new Employee("Luca","Nerv",1300,0);
-        Employee e3 = new Employee("Paolo","Bita",1400,0);
+
+        Role r1 = new Role("Manager");
+        Role r2 = new Role("Junior");
+        Role r3 = new Role("Senior");
+
+        rService.saveRole(r1);
+        rService.saveRole(r2);
+        rService.saveRole(r3);
+
+        Employee e1 = new Employee("Gino","Merend",1200,0,r1);
+        Employee e2 = new Employee("Luca","Nerv",1300,0,r2);
+        Employee e3 = new Employee("Paolo","Bita",1400,0,r3);
+
 
         service.save(e1);
         service.save(e2);
@@ -42,7 +57,7 @@ public class EmployeeController {
     //Create
     @PostMapping("create")
     public ResponseEntity<Employee> createEmployee(@RequestBody EmployeeDTO dto){
-        Employee e = new Employee(dto.getName(),dto.getSurname(),dto.getSalary(),dto.getBonus());
+        Employee e = new Employee(dto.getName(),dto.getSurname(),dto.getSalary(),dto.getBonus(),dto.getRole());
         service.save(e);
         return ResponseEntity.ok(e);
     }

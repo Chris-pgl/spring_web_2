@@ -1,11 +1,14 @@
 package api_rest_2.demo.web.dto;
 
+import api_rest_2.demo.entity.Role;
+
 public class EmployeeDTO {
 
     String name;
     String surname;
     int salary;
     int bonus;
+    Role role;
 
     
 
@@ -48,6 +51,16 @@ public class EmployeeDTO {
     public String toString() {
         return "EmployeeDTO [name=" + name + ", surname=" + surname + ", salary=" + salary + ", bonus=" + bonus + "]";
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    
 
     
     

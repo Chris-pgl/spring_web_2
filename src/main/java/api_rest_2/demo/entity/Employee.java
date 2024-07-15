@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Employee {
@@ -25,15 +27,21 @@ public class Employee {
 
     @Column(nullable= true)
     int bonus;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    Role role;
     
     public Employee() {
     }
 
-    public Employee(String name, String surname, int salary, int bonus) {
+    public Employee(String name, String surname, int salary, int bonus, Role role) {
         this.name = name;
         this.surname = surname;
         this.salary = salary;
         this.bonus = bonus;
+        this.role = role;
+
     }
 
     public int getId() {
@@ -88,8 +96,18 @@ public class Employee {
         setSurname(dto.getSurname());
         setSalary(dto.getSalary());
         setBonus(dto.getBonus());
+        setRole(dto.getRole());
+        
     }
 
-    
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+
 
 }
